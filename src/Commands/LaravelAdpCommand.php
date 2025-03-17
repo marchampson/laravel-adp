@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace MarcHampson\LaravelAdp\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelAdpCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-adp';
 
     public $description = 'My command';
 

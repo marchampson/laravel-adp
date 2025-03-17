@@ -1,37 +1,64 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace MarcHampson\LaravelAdp\Tests;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use MarcHampson\LaravelAdp\LaravelAdpServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
-use VendorName\Skeleton\SkeletonServiceProvider;
 
 class TestCase extends Orchestra
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'VendorName\\Skeleton\\Database\\Factories\\'.class_basename($modelName).'Factory'
-        );
-    }
+    use RefreshDatabase;
 
     protected function getPackageProviders($app)
     {
         return [
-            SkeletonServiceProvider::class,
+            LaravelAdpServiceProvider::class,
         ];
     }
 
-    public function getEnvironmentSetUp($app)
+    protected function defineDatabaseMigrations()
     {
-        config()->set('database.default', 'testing');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+    }
 
-        /*
-         foreach (\Illuminate\Support\Facades\File::allFiles(__DIR__ . '/database/migrations') as $migration) {
-            (include $migration->getRealPath())->up();
-         }
-         */
+    protected function defineDatabaseFactories()
+    {
+        $this->loadFactoriesFrom(__DIR__.'/../database/factories');
+    }
+
+    protected function getEnvironmentSetUp($app)
+    {
+        $app['config']->set('database.default', 'sqlite');
+        $app['config']->set('database.connections.sqlite', [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => '',
+        ]);
+    }
+
+    protected function getPackageAliases($app)
+    {
+        return [
+            'LaravelAdp' => \MarcHampson\LaravelAdp\Facades\LaravelAdp::class,
+        ];
+    }
+
+    protected function getPackageBootstrappers($app)
+    {
+        return [
+            \Orchestra\Testbench\Bootstrap\LoadEnvironmentVariables::class,
+            \Orchestra\Testbench\Bootstrap\LoadConfiguration::class,
+            \Orchestra\Testbench\Bootstrap\HandleExceptions::class,
+            \Orchestra\Testbench\Bootstrap\LoadMigrationsFrom::class,
+            \Orchestra\Testbench\Bootstrap\LoadFactoriesFrom::class,
+        ];
+    }
+
+    protected function getPackageFactories($app)
+    {
+        return [
+            fn (string $modelName) => 'MarcHampson\\LaravelAdp\\Database\\Factories\\'.class_basename($modelName).'Factory'
+        ];
     }
 }
