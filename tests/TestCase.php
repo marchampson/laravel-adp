@@ -58,7 +58,7 @@ class TestCase extends Orchestra
     protected function getPackageFactories($app)
     {
         return [
-            fn (string $modelName) => 'MarcHampson\\LaravelAdp\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'MarcHampson\\LaravelAdp\\Database\\Factories\\'.class_basename($modelName).'Factory',
         ];
     }
 }

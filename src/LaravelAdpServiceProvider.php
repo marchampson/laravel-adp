@@ -2,9 +2,9 @@
 
 namespace MarcHampson\LaravelAdp;
 
+use MarcHampson\LaravelAdp\Commands\LaravelAdpCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use MarcHampson\LaravelAdp\Commands\LaravelAdpCommand;
 
 class LaravelAdpServiceProvider extends PackageServiceProvider
 {
