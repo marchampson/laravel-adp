@@ -18,6 +18,29 @@ You can install the package via composer:
 composer require marchampson/laravel-adp
 ```
 
+### Local Development
+
+To test this package in another Laravel project during development:
+
+1. In your Laravel project's `composer.json`, add the local repository:
+```json
+{
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../laravel-adp"
+        }
+    ]
+}
+```
+
+2. Then require the package:
+```bash
+composer require marchampson/laravel-adp
+```
+
+This will create a symlink to your local package, allowing you to test changes immediately.
+
 You can publish and run the migrations with:
 
 ```bash
@@ -48,7 +71,7 @@ php artisan vendor:publish --tag="laravel-adp-views"
 
 ```php
 $laravelAdp = new MarcHampson\LaravelAdp();
-echo $laravelAdp->echoPhrase('Hello, MarcHampson!');
+echo $laravelAdp->echoPhrase('Hello, Marc Hampson!');
 ```
 
 ## Testing
