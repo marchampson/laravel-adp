@@ -9,6 +9,7 @@ This package provides a Laravel middleware that implements the Agent Discovery P
 
 The middleware can be easily added to your routes or middleware groups to selectively expose route information. The response format follows standard JSON conventions and can be consumed by any HTTP client.
 
+## THIS PACKAGE IS STILL UNDER DEVELOPMENT AND NOT PRODUCTION READY
 
 ## Installation
 
